@@ -56,10 +56,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2015', 'stage-0', 'react']
-        }
+        loader: 'babel'
       },
       {
         test: /\.scss$/,
@@ -86,5 +83,6 @@ module.exports = {
   devServer: {
     contentBase: 'build',
     host: '0.0.0.0',
+    port: 8090
   },
 };

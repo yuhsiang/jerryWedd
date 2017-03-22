@@ -191,7 +191,7 @@ background-position-y: 0%;
   @media only screen
     and (min-device-width: 736px)
     {
-    @include responsive_heart(150px, 32px, 17px, 350px, 150px, 240px);
+    @include responsive_heart(150px, 32px, 17px, 350px, 180px, 240px);
   }
 }
 

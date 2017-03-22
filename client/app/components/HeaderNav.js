@@ -23,10 +23,11 @@ export default class HeaderNav extends React.Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight bsStyle="pills" onSelect={this.handleSelect}>
-            <NavItem eventKey={1} href="/">NavItem 1</NavItem>
+
           </Nav>
         </Navbar.Collapse>
       </Navbar>
     );
   }
 }
+// <NavItem eventKey={1} href="/">NavItem 1</NavItem>

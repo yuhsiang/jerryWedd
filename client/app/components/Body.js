@@ -34,11 +34,7 @@ export default class Body extends React.Component {
           <div className="wedding-main">
             <img className="responsive-heart" src={'images/heart-1.png'} alt=""/>
             <span className="heart-name text-theme-color">Jerry & Stacy</span>
-            <span className="heart-subtitle">Are Getting Married at 20 May 2017</span>
           </div>
-        </div>
-        <div className="protagonist">
-          <Protagonist />
         </div>
         <div className="info-container">
           <Engage />

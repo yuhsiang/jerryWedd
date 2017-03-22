@@ -1,0 +1,237 @@
+@mixin full-height {
+  height: 100%;
+}
+
+@mixin size($w, $h) {
+  width: $w;
+  height: $h;
+}
+
+@mixin responsive_heart_mb($topPadding, $szTitle, $heart-size) {
+  & .wedding-main{
+    position: relative;
+    padding-top: $topPadding !important;
+    .responsive-heart {
+      height: $heart-size !important;
+      width: auto;
+      max-width: 100%;
+      max-height: 100%
+    }
+    & .heart-name{
+      position: absolute;
+      bottom: 110px;
+      font-size: $szTitle;
+    }
+    & .heart-subtitle{
+      position: absolute;
+      font-family: 'Playball', sans-serif;
+      width: 100%;
+      left: 0px;
+      bottom: 82px;
+      font-size: 13px;
+    }
+  }
+}
+
+@mixin responsive_heart($topPadding, $szTitle, $szSubtitle, $heart-size, $posTitle, $posSubtitle) {
+  & .wedding-main{
+    position: relative;
+    padding-top: $topPadding !important;
+    .responsive-heart {
+      height: $heart-size !important;
+      width: auto;
+      max-width: 100%;
+      max-height: 100%
+    }
+    & .heart-name{
+      position: absolute;
+      bottom: $heart-size - $posTitle;
+      font-size: $szTitle;
+    }
+    & .heart-subtitle{
+      position: absolute;
+      font-family: 'Playball', sans-serif;
+      width: 100%;
+      left: 0px;
+      bottom: $heart-size - $posSubtitle;
+      font-size: $szSubtitle;
+    }
+  }
+}
+
+.snow{
+  background: none;
+  // font-family: Androgyne;
+  background-image: url('../images/bg12.png'), url('../images/bg14.png');
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index:1;
+  -webkit-animation: snow 10s linear infinite;
+  -moz-animation: snow 10s linear infinite;
+  -ms-animation: snow 10s linear infinite;
+  animation: snow 10s linear infinite;
+
+}
+@keyframes snow {
+  0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
+  50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
+  100% {background-position: 500px 1000px, 200px 400px, -100px 300px;}
+}
+@-moz-keyframes snow {
+  0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
+  50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
+  100% {background-position: 400px 1000px, 200px 400px, 100px 300px;}
+}
+@-webkit-keyframes snow {
+  0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
+  50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
+  100% {background-position: 500px 1000px, 200px 400px, -100px 300px;}
+}
+@-ms-keyframes snow {
+  0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
+  50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
+  100% {background-position: 500px 1000px, 200px 400px, -100px 300px;}
+}
+& .background {
+    /* The image used */
+  background: #fff url("../images/background.jpg") center fixed repeat;
+  text-align: center;
+  // min-height: 100%;
+  // height: calc(100% - 50px);
+  @include full-height;
+  position: relative;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  .responsive-heart{
+    padding-right: 5%;
+    padding-left: 5%;
+  }
+
+  & .heart-name{
+    font-family: 'Playball', sans-serif;
+    position: absolute;
+    width: 100%;
+    left: 0px;
+  }
+  & .heart-subtitle{
+    position: absolute;
+    font-family: 'Playball', sans-serif;
+    width: 100%;
+    left: 0px;
+    bottom: 28%;
+
+    min-height: 0px;
+    min-width: 0px;
+    max-height: none;
+    max-width: none;
+    transform-origin: 50% 50% 0px;
+  }
+  @media only screen
+    and (min-device-width: 300px)
+    and (max-device-width: 736px)
+    and (orientation: portrait) {
+    @include responsive_heart_mb(150px, 26px, 200px);
+  }
+  @media only screen
+    and (min-device-width: 300px)
+    and (max-device-width: 736px)
+    and (orientation: landscape) {
+    @include responsive_heart_mb(60px, 26px, 200px);
+  }
+}
+
+& .background {
+    /* The image used */
+  background: #fff url("../images/background.jpg") center fixed repeat;
+  text-align: center;
+  // min-height: 100%;
+  // height: calc(100% - 50px);
+  @include full-height;
+  position: relative;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  .responsive-heart{
+    padding-right: 5%;
+    padding-left: 5%;
+  }
+
+  & .heart-name{
+    font-family: 'Playball', sans-serif;
+    position: absolute;
+    width: 100%;
+    left: 0px;
+  }
+  & .heart-subtitle{
+    position: absolute;
+    font-family: 'Playball', sans-serif;
+    width: 100%;
+    left: 0px;
+    bottom: 28%;
+
+    min-height: 0px;
+    min-width: 0px;
+    max-height: none;
+    max-width: none;
+    transform-origin: 50% 50% 0px;
+  }
+  @media only screen
+    and (min-width: 300px)
+    and (max-width: 736px) {
+    @include responsive_heart(150px, 32px, 16px, 300px, 130px, 220px);
+  }
+  @media only screen
+    and (min-device-width: 736px)
+    {
+    @include responsive_heart(150px, 32px, 17px, 350px, 150px, 240px);
+  }
+}
+
+
+// @media screen
+//   and (min-device-width: 1200px)
+//   and (max-device-width: 1600px)
+//   and (-webkit-min-device-pixel-ratio: 1) {
+//
+//
+// }
+//
+
+// @media screen and (min-width: 700px) {
+//   .responsive-heart {
+//
+//   }
+//   & .heart-name{
+//     top: 220px !important;
+//     font-size: 62px !important;
+//   }
+// }
+// @media screen and (max-width: 700px) {
+//   .responsive-heart {
+//     @include size(100%, auto !important);
+//
+//   }
+// }
+// @media screen and (max-height: 600px){
+//   .responsive-heart {
+//     height: 200px !important;
+//     width: auto;
+//     max-width: 100%;
+//     max-height: 100%
+//   }
+// }
+// @media screen and (max-height: 740px) and (max-width: 600px){
+//   .responsive-heart {
+//     height: 200px;
+//   }
+//   & .heart-name{
+//     top: 190px;
+//     font-size: 6vw;
+//   }
+// }

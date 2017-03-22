@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import { Card, RaisedButton } from 'material-ui';
+import 'bootstrap/less/bootstrap.less';
+import Body from './Body';
 
-const Home = (props) => (
+/*
+const Home1 = (props) => (
   <Card className="container">
     <h2 className="card-heading">Year Party Game</h2>
     <div className="button-line">
@@ -15,5 +17,12 @@ const Home = (props) => (
 Home.propTypes = {
 
 };
+*/
+
+const Home = (props) => (
+  <div className="content-bg">
+    <Body></Body>
+  </div>
+);
 
 export default Home;

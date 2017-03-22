@@ -1,68 +1,206 @@
-body {
+@import "background";
+@import "main_char";
+
+// variables
+$header-color: rgba(243, 198, 209, 0.5);
+
+@import url("https://fonts.googleapis.com/css?family=Playball");
+
+@mixin size($w, $h) {
+  width: $w;
+  height: $h;
+}
+
+@mixin full-height {
+  height: 100%;
+}
+
+@mixin transparent {
+  background: transparent;
+}
+
+// HEADER
+.navbar-inverse{
+  background-color: $header-color !important;
+  border-color: $header-color !important;
+}
+.navbar-brand {
+  color: #696969 !important;
+  font-size: 23px !important;
+  font-family: 'Playball', sans-serif;
+}
+.navbar-collapse {
+  border-color: $header-color !important;
+}
+.navbar-toggle {
+  border-color: #696969 !important;
+  & .icon-bar {
+    background-color: #696969 !important;
+  }
+}
+.navbar-toggle:hover{
+  background-color: $header-color !important;
+}
+.navbar-toggle:focus{
+  background-color: $header-color !important;
+}
+
+/* -------- Custom Font Family ---------- */
+.font-raleway {
+  font-family: 'Raleway', sans-serif;
+}
+.font-opensans {
+  font-family: 'Open Sans', sans-serif;
+}
+.font-playfair {
+  font-family: 'Playfair Display', serif;
+}
+.font-playball {
+  font-family: 'Playball', sans-serif;
+}
+
+#root, #root > [data-reactroot]
+{
+  @include full-height;
+}
+
+html, body{
+  height: 100%;
   margin: 0;
-  font-size: 16px;
+  font-size: 28px;
 }
 
 .text-center {
   text-align: center;
 }
 
-.top-bar {
-  padding: 10px 15px;
-  margin-bottom: 50px;
-
-  &:after {
-    content: '';
-    display: block;
-    clear: both;
-  }
+// .top-bar {
+//   padding: 10px 15px;
+//   margin-bottom: 50px;
+//
+//   &:after {
+//     content: '';
+//     display: block;
+//     clear: both;
+//   }
+// }
+.content-bg{
+  @include full-height;
 }
-
-.top-bar-left {
-  float: left;
-  font-size: 1.5em;
-}
-
-.top-bar-right {
-  float: right;
-}
-
-.top-bar , .nav {
-  a {
-    margin: 0 8px;
-  }
-}
-
-.container {
-  margin: 0 auto;
+.victoria {
+  background: #fff url("../images/victoria.jpg") center fixed repeat;
   text-align: center;
-  width: 700px;
+  // min-height: 100%;
+  // height: calc(100% - 50px);
+  @include size(100%, 80px);
+  position: relative;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-
-.card-heading {
-  padding: 16px;
-}
-
-.card-answer-container {
-  display: flex;
-  justify-content: center;
-  .card-answer-yes, .card-answer-no {
-    flex: 1;
-    margin: 10px;
-    font-size: 150px;
+.content{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  & .content-hd-bg {
+    @include full-height;
   }
+  & .info-container {
+    @media only screen
+    and (min-width: 700px) {
+      padding: 5px 20%;
+    }
+    @media only screen
+    and (max-width: 700px) {
+      padding: 5px 0;
+    }
+    width: 100%;
+    text-align: center;
+    border: transparent;
+    border-radius: 5px;
+    // height: 300px;
+    background-image: url('../images/p20.jpg');
+    div {
+      // font-family: 微軟正黑體;
+      // font-size: 20px;
+    }
+    & .detail {
+      background-image: url('../images/p5.png');
+      border-radius: 10px;
+      background: white;
+      margin: 8px 20px 8px 20px;
+      padding: 3px 10px 0px 10px;
+      & .section {
+        margin-bottom: 20px;
+        h4{
+          font-size: 20px;
+        }
+        p{
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+}
+.has-nav {
+  top: 50px;
+  position: absolute;
+}
+.text-theme-color{
+  color: #d65679 !important;
 }
 
-.field-line, .button-line {
-  padding: 16px;
-}
 
-.error-message {
-  padding: 0 16px;
-  color: tomato;
-}
 
-.success-message {
-  padding: 0 16px;
-  color: green;
-}
+
+
+// .top-bar-left {
+//   float: left;
+//   font-size: 1.5em;
+// }
+//
+// .top-bar-right {
+//   float: right;
+// }
+//
+// .top-bar , .nav {
+//   a {
+//     margin: 0 8px;
+//   }
+// }
+//
+// .container {
+//   margin: 0 auto;
+//   text-align: center;
+//   width: 700px;
+// }
+
+// .card-heading {
+//   padding: 16px;
+// }
+//
+// .card-answer-container {
+//   display: flex;
+//   justify-content: center;
+//   .card-answer-yes, .card-answer-no {
+//     flex: 1;
+//     margin: 10px;
+//     font-size: 150px;
+//   }
+// }
+//
+// .field-line, .button-line {
+//   padding: 16px;
+// }
+//
+// .error-message {
+//   padding: 0 16px;
+//   color: tomato;
+// }
+//
+// .success-message {
+//   padding: 0 16px;
+//   color: green;
+// }

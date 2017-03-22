@@ -2,7 +2,7 @@ const debug = require('debug')('router:files');
 const express = require('express');
 const superAgent = require('superagent');
 const config = require('../config');
-
+const path = require('path');
 const formidable = require('formidable');
 const mongoose = require('mongoose');
 const grid = require('gridfs-stream');
@@ -20,7 +20,8 @@ module.exports = (function() {
     IMAGES: '/images',
     DISPLAY: '/display/:id'
   };
-  const PATH_TEMP = __dirname + '../data';
+
+  const PATH_TEMP = path.resolve(config.ROOT_PATH, 'data');
 
   /**
    * Main
@@ -35,6 +36,7 @@ module.exports = (function() {
 
   function upload(req, res) {
     const form = new formidable.IncomingForm();
+    console.log(PATH_TEMP);
     form.uploadDir = PATH_TEMP;
     form.keepExtensions = true;
 
@@ -43,7 +45,7 @@ module.exports = (function() {
         return;
       }
       console.log('File uploaded : ' + files.file.path);
-      filePath = files.file.path;
+      let filePath = files.file.path;
       const conn = mongoose.createConnection(config.dbUri);
       grid.mongo = mongoose.mongo;
       conn.once('open', function () {
@@ -77,6 +79,7 @@ module.exports = (function() {
       const gfs = grid(conn.db, mongoose.mongo);
       gfs.files.find().toArray((err, files) => {
         console.log(files);
+        console.log(files[0].uploadDate);
         const images = files.map((f) => ({id: f._id, filename: f.filename}));
         const resJSON = {images: images};
         res.end(JSON.stringify(resJSON));
@@ -87,13 +90,21 @@ module.exports = (function() {
   function display(req, res) {
     const conn = mongoose.createConnection(config.dbUri);
     conn.once('open',  () => {
-      const gfs = grid(conn.db, mongoose.mongo);
-      var readstream = gfs.createReadStream(
-        {
-          _id: req.params.id
-        }
-      );
-      readstream.pipe(res);
+      try {
+        const gfs = grid(conn.db, mongoose.mongo);
+        var readstream = gfs.createReadStream(
+          {
+            _id: req.params.id
+          }
+        );
+        readstream.pipe(res);
+        readstream.on('error', function (err) {
+          res.end('Would you stop trying?');
+        });
+      } catch (e) {
+        // res.end(e);
+      }
+
     });
   };
 })();

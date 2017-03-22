@@ -8,6 +8,7 @@ module.exports = (function() {
    * Global Constants
    */
   const DOTENV_PATH = path.resolve(__dirname, '../../.env');
+  const ROOT_PATH = path.resolve(__dirname, '../../');
 
   /**
    * Main
@@ -27,6 +28,7 @@ module.exports = (function() {
   return {
     port: process.env.PORT || 8080,
     dbUri: process.env.MONGODB_URI || 'mongodb://localhost/jerry',
+    ROOT_PATH: ROOT_PATH
   };
 
   /**

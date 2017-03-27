@@ -3406,7 +3406,7 @@ webpackJsonp([1],[
 	            null,
 	            _react2.default.createElement(
 	              'a',
-	              { href: '/' },
+	              { href: '/#/' },
 	              'Happy Wedding'
 	            )
 	          ),

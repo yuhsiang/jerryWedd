@@ -17,7 +17,7 @@ export default class HeaderNav extends React.Component {
       <Navbar inverse collapseOnSelect fixedTop >
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="/">Happy Wedding</a>
+            <a href="/#/">Happy Wedding</a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>

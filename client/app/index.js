@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { browserHistory, Router } from 'react-router';
+import { hashHistory, Router } from 'react-router';
 import { applyMiddleware, createStore } from 'redux';
 import createLogger from 'redux-logger';
 import thunk from 'redux-thunk';
@@ -19,7 +19,7 @@ function renderApp(store) {
 
   render(
     <Provider store= { store }>
-      <Router history={ browserHistory } routes={ routes } />
+      <Router history={ hashHistory } routes={ routes } />
     </Provider>,
     document.getElementById('root')
   );

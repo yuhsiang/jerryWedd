@@ -24,7 +24,7 @@ export default class Wedding extends React.Component {
         <GoogleMap lat={22.751720} lon={120.445359} name={'Victoria Hotel'}/>
         </div>
         <div className="section">
-          <h4>佛陀紀念館禮敬大廳[婚宴]</h4>
+          <h4>『婚宴』佛陀紀念館禮敬大廳</h4>
         </div>
         <div style={{height: '300px', paddingBottom: '20px'}}>
           <GoogleMap lat={22.755542} lon={120.445631} name={'Victoria Hotel'}/>

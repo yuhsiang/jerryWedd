@@ -4,11 +4,12 @@ import App from './components/App';
 import Home from './components/Home';
 import Question from './components/Question';
 import PageNotFound from './components/PageNotFound';
+import GoogleForm from './components/GoogleForm';
 
 const routes = (
   <Route path="/" component={ App }>
     <IndexRoute component={ Home } />
-    <Route path="question" component={ PageNotFound } />
+    <Route path="form" component={ GoogleForm } />
     <Route path="*" component={ PageNotFound } />
   </Route>
 );

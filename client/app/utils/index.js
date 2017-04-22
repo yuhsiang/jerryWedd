@@ -1,12 +1,16 @@
 import superAgent from 'superagent';
 
-const API_PATH = 'http://139.162.49.146/api';
+const API_PATH = '';
 
-export function getQuestion() {
+export function getImageURL(id) {
+  return `${API_PATH}/files/display/${id}`;
+}
+
+export function getImages(range) {
   return new Promise((resolve, reject) => {
-    const requestUrl = `${API_PATH}/question/start`;
+    const requestUrl = `${API_PATH}/files/album/${range}`;
     superAgent
-      .post(requestUrl)
+      .get(requestUrl)
       .end((err, res) => {
         if (err) {
           return reject(err);
@@ -16,9 +20,9 @@ export function getQuestion() {
   });
 }
 
-export function getAnswer(qId) {
+export function getAlbums() {
   return new Promise((resolve, reject) => {
-    const requestUrl = `${API_PATH}/question/${qId}`;
+    const requestUrl = `${API_PATH}/files/album/`;
     superAgent
       .get(requestUrl)
       .end((err, res) => {

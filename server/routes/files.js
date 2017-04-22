@@ -18,6 +18,8 @@ module.exports = (function() {
   const ROUTES = {
     UPLOAD: '/upload',
     IMAGES: '/images',
+    DATE_ALBUM: '/album',
+    ALBUM_IMAGES: '/album/:time',
     DISPLAY: '/display/:id'
   };
 
@@ -31,6 +33,8 @@ module.exports = (function() {
   router.post(ROUTES.UPLOAD, upload);
   router.get(ROUTES.IMAGES, images);
   router.get(ROUTES.DISPLAY, display);
+  router.get(ROUTES.DATE_ALBUM, date_album);
+  router.get(ROUTES.ALBUM_IMAGES, album_images);
 
   return router;
 
@@ -72,6 +76,82 @@ module.exports = (function() {
     });
   }
 
+  function date_album(req, res) {
+    const conn = mongoose.createConnection(config.dbUri);
+    conn.once('open',  () => {
+      const gfs = grid(conn.db, mongoose.mongo);
+      gfs.files.find().toArray((err, files) => {
+
+        var existance = {};
+        const filteredImages = files.filter((f) => {
+
+          return !isTimeExist(existance, f.uploadDate);
+        });
+        let copy;
+        const album = filteredImages.map(f => {
+          let time = new Date(f.uploadDate);
+          time = new Date(time.getFullYear(), time.getMonth(), time.getDate());
+          return ({id: f._id, filename: f.filename, date: time.getTime(), albumName: getAlbumName(f.uploadDate)});
+        });
+        res.send({album});
+      });
+    });
+
+    function getAlbumName(time) {
+      let dateTime = new Date(time);
+      return (dateTime.getMonth()+1)+"月"+dateTime.getDate();
+    }
+  }
+
+  function album_images(req, res) {
+    let time = req.params.time;
+
+    if (isNaN(parseInt(time))) {
+      res.status(400).send('invalid input');
+      return;
+    }
+
+
+    const PER_PAGE = 100;
+    let page = (Math.abs(req.query.p) || 1) - 1;
+    let limit = Math.abs(req.query.limit) || PER_PAGE;
+
+    console.log('process time')
+    time = parseInt(time);
+    const reqTime = new Date(time);
+    const upperTime = new Date(time + 1000*60*60*24);
+    const conn = mongoose.createConnection(config.dbUri);
+    const filter = {
+      uploadDate: {
+          $gte: reqTime,
+          $lt: upperTime
+        }
+    };
+
+    conn.once('open',  () => {
+      const gfs = grid(conn.db, mongoose.mongo);
+      gfs.files.find(filter).limit(limit).skip(limit * page).toArray((err, files) => {
+          const images = files.map((f) => {
+            return ({id: f._id, filename: f.filename, uploadDate: f.uploadDate})});
+          const resJSON = {images: images};
+          res.send(resJSON);
+        });
+    });
+  }
+
+  function isTimeExist(existance, time) {
+    if (typeof existance === 'undefined' || !existance) {
+      throw 'existArray not exist';
+    }
+    let date = new Date(time); // ISO time
+    date = time.getFullYear() + time.getMonth() + time.getDate();
+    if (date in existance) {
+      return true;
+    } else {
+      existance[date]="";
+    }
+  }
+
   function images(req, res) {
     const conn = mongoose.createConnection(config.dbUri);
 
@@ -80,9 +160,11 @@ module.exports = (function() {
       gfs.files.find().toArray((err, files) => {
         console.log(files);
         console.log(files[0].uploadDate);
-        const images = files.map((f) => ({id: f._id, filename: f.filename}));
+        const images = files.map((f) => {
+          console.log(f);
+          return ({id: f._id, filename: f.filename, uploadDate: f.uploadDate})});
         const resJSON = {images: images};
-        res.end(JSON.stringify(resJSON));
+        res.send(resJSON);
       });
     });
   };

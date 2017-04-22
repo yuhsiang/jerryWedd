@@ -8,8 +8,13 @@ import { hashHistory } from 'react-router';
 export default class HeaderNav extends React.Component {
   handleSelect(eventKey) {
     event.preventDefault();
+    if (eventKey === 1) {
+      hashHistory.push('/form');
+    }
+    else if (eventKey === 2) {
+      hashHistory.push('/album');
+    }
 
-    hashHistory.push('/form');
   }
 
   render() {
@@ -23,7 +28,10 @@ export default class HeaderNav extends React.Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight bsStyle="pills" onSelect={this.handleSelect}>
-            <NavItem eventKey={1} href="form">參加歡宴</NavItem>
+            <NavItem eventKey={1} href="form">參加喜宴</NavItem>
+          </Nav>
+          <Nav pullRight bsStyle="pills" onSelect={this.handleSelect}>
+            <NavItem eventKey={2} href="album">相片集</NavItem>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

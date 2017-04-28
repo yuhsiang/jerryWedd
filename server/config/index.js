@@ -27,7 +27,7 @@ module.exports = (function() {
 
   return {
     port: process.env.PORT || 8080,
-    dbUri: process.env.MONGODB_URI || 'mongodb://localhost/jerry',
+    dbUri: process.env.MONGODB_URI || 'mongodb://172.17.0.1/jerry',
     ROOT_PATH: ROOT_PATH
   };
 

@@ -13,7 +13,8 @@ export default class Engage extends React.Component {
         <img src={sectionBreak} />
 
         <div className="section">
-          <h4>- Date & Time: <strong>5/ 6</strong> -</h4>
+          <h4>- Date & Time -</h4>
+          <p><strong>2017. 5. 6</strong></p>
           <p>11:30 - 🍹雞尾酒🍹</p>
           <p>12:00 - 👰婚宴開始💐</p>
         </div>

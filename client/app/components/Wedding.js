@@ -12,7 +12,8 @@ export default class Wedding extends React.Component {
         <h2>婚宴</h2>
         <img src={sectionBreak} />
         <div className="section">
-          <h4>- Date & Time: <strong>5/ 20</strong> -</h4>
+          <h4>- Date & Time -</h4>
+          <p><strong>2017. 5. 20</strong></p>
           <p>10:00 - 佛化婚禮</p>
           <p>12:00 - 👰婚宴開始💐</p>
         </div>

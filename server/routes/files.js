@@ -17,6 +17,7 @@ module.exports = (function() {
    */
   const ROUTES = {
     UPLOAD: '/upload',
+    LOCAL_UPLOAD: '/local_upload',
     IMAGES: '/images',
     DATE_ALBUM: '/album',
     ALBUM_IMAGES: '/album/:time',
@@ -31,6 +32,7 @@ module.exports = (function() {
   const router = new express.Router();
 
   router.post(ROUTES.UPLOAD, upload);
+  router.post(ROUTES.LOCAL_UPLOAD, local_upload);
   router.get(ROUTES.IMAGES, images);
   router.get(ROUTES.DISPLAY, display);
   router.get(ROUTES.DATE_ALBUM, date_album);
@@ -74,6 +76,47 @@ module.exports = (function() {
     form.on('end', function() {
       res.send('Completed ..... go and check fs.files & fs.chunks in  mongodb');
     });
+  }
+
+  function local_upload(req, res) {
+    const form = new formidable.IncomingForm();
+
+    const path = req.body.path;
+    const fname = req.body.fname;
+
+    if (!path || !fname) {
+      res.status(400).send('invalid input');
+      return;
+    }
+
+    if (!fs.existsSync(path)) {
+      res.status(400).send('invalid input');
+      return;
+    }
+
+    let filePath = path;
+    const conn = mongoose.createConnection(config.dbUri);
+    grid.mongo = mongoose.mongo;
+    conn.once('open', function () {
+      const gfs = grid(conn.db);
+      const writestream = gfs.createWriteStream({
+        filename: fname,
+        metadata: {test: 'this is a test'}
+      });
+      const stream = fs.createReadStream(path).pipe(writestream);
+
+      var had_error = false;
+      stream.on('error', function(err){
+        had_error = true;
+      });
+      stream.on('close', function(){
+        if (filePath !== undefined) {
+          fs.unlink(filePath);
+        }
+        res.send({msg: "upload success"});
+      });
+    });
+
   }
 
   function date_album(req, res) {

@@ -103,8 +103,14 @@ html, body{
   width: 100%;
   height: 100%;
   position: relative;
+  & .album-container{
+    padding-top: 70px;
+  }
   & .content-hd-bg {
     @include full-height;
+    background-image: url('../images/p11.png');
+    overflow: scroll;
+
   }
   & .info-container {
     @media only screen
@@ -152,9 +158,7 @@ html, body{
   color: #d65679 !important;
 }
 
-.album-container{
-  margin-top: 70px;
-}
+
 
 
 

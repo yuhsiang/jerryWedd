@@ -5,7 +5,8 @@ import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import { Image, Thumbnail } from 'react-bootstrap';
 import { getImageURL, getImages } from '../utils';
-import Gallery from './Gallery';
+import Gallery from 'react-grid-gallery';
+// import Gallery from './Gallery';
 
 // <div className="background"><img src={"images/heart-1.png"} alt=""/></div>
 
@@ -32,11 +33,8 @@ export default class AlbumImages extends React.Component {
       <Gallery images={images.map(({ id }) => ({
         src: getImageURL(id),
         thumbnail: `${getImageURL(id)}?type=thumbnail`,
-        srcset: [
-        ],
-        caption:'',
-        orientation:'square',
-        useForDemo:true,
+        // thumbnailWidth: 320,
+        // thumbnailHeight: 212,
       }))} />
     );
   }

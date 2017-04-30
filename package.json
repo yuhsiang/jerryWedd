@@ -73,6 +73,7 @@
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
     "react-google-maps": "^4.11.0",
+    "react-grid-gallery": "^0.3.3",
     "react-images": "^0.5.2",
     "react-parallax": "^1.2.3",
     "react-redux": "^4.4.5",

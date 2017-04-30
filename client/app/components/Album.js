@@ -40,7 +40,7 @@ export default class Album extends React.Component {
     return album.map(a => {
       return (
         <Col key={a.id} xs={6} md={3}>
-          <Thumbnail href={`#/album/${a.date}`} alt="171x180" src={getImageURL(a.id)} >
+          <Thumbnail href={`#/album/${a.date}`} alt="171x180" src={`${getImageURL(a.id)}?type=thumbnail`} >
             <h4>{a.albumName}</h4>
           </Thumbnail>
         </Col>

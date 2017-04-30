@@ -31,7 +31,7 @@ export default class AlbumImages extends React.Component {
     return (
       <Gallery images={images.map(({ id }) => ({
         src: getImageURL(id),
-        thumbnail: getImageURL(id, 'square'),
+        thumbnail: `${getImageURL(id)}?type=thumbnail`,
         srcset: [
         ],
         caption:'',

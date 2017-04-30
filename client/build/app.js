@@ -11351,7 +11351,7 @@ webpackJsonp([1],[
 	          { key: a.id, xs: 6, md: 3 },
 	          _react2.default.createElement(
 	            _reactBootstrap.Thumbnail,
-	            { href: '#/album/' + a.date, alt: '171x180', src: (0, _utils.getImageURL)(a.id) },
+	            { href: '#/album/' + a.date, alt: '171x180', src: (0, _utils.getImageURL)(a.id) + '?type=thumbnail' },
 	            _react2.default.createElement(
 	              'h4',
 	              null,
@@ -11470,7 +11470,7 @@ webpackJsonp([1],[
 	          var id = _ref.id;
 	          return {
 	            src: (0, _utils.getImageURL)(id),
-	            thumbnail: (0, _utils.getImageURL)(id, 'square'),
+	            thumbnail: (0, _utils.getImageURL)(id) + '?type=thumbnail',
 	            srcset: [],
 	            caption: '',
 	            orientation: 'square',
@@ -11686,13 +11686,16 @@ webpackJsonp([1],[
 	          _react2.default.createElement(
 	            'h4',
 	            null,
-	            '- Time: ',
+	            '- Date & Time -'
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
 	            _react2.default.createElement(
 	              'strong',
 	              null,
-	              '5/ 6'
-	            ),
-	            ' -'
+	              '2017. 5. 6'
+	            )
 	          ),
 	          _react2.default.createElement(
 	            'p',
@@ -12523,13 +12526,16 @@ webpackJsonp([1],[
 	          _react2.default.createElement(
 	            'h4',
 	            null,
-	            '- Time: ',
+	            '- Date & Time -'
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
 	            _react2.default.createElement(
 	              'strong',
 	              null,
-	              '5/ 20'
-	            ),
-	            ' -'
+	              '2017. 5. 20'
+	            )
 	          ),
 	          _react2.default.createElement(
 	            'p',

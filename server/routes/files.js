@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const grid = require('gridfs-stream');
 const fs = require('fs');
 const util = require('util');
+const im = require('imagemagick-stream');
 
 module.exports = (function() {
   'use strict';
@@ -111,7 +112,7 @@ module.exports = (function() {
       });
       stream.on('close', function(){
         if (filePath !== undefined) {
-          fs.unlink(filePath);
+          // fs.unlink(filePath);
         }
         res.send({msg: "upload success"});
       });
@@ -135,7 +136,10 @@ module.exports = (function() {
           let time = new Date(f.uploadDate);
           time = new Date(time.getFullYear(), time.getMonth(), time.getDate());
           return ({id: f._id, filename: f.filename, date: time.getTime(), albumName: getAlbumName(f.uploadDate)});
+        }).sort((f1, f2) => {
+          return f1.date < f2.date;
         });
+
         res.send({album});
       });
     });
@@ -214,14 +218,19 @@ module.exports = (function() {
 
   function display(req, res) {
     const conn = mongoose.createConnection(config.dbUri);
+    const type = req.query.type;
+
     conn.once('open',  () => {
       try {
         const gfs = grid(conn.db, mongoose.mongo);
-        var readstream = gfs.createReadStream(
+        let readstream = gfs.createReadStream(
           {
             _id: req.params.id
           }
         );
+        if (type == 'thumbnail') {
+          readstream = readstream.pipe(im().resize('300x').quality(90));
+        }
         readstream.pipe(res);
         readstream.on('error', function (err) {
           res.end('Would you stop trying?');
